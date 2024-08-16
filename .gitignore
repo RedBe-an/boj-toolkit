@@ -1,3 +1,5 @@
 __pycache__/
 demo/
 key-pypi.txt
+dist/
+*.egg-info/

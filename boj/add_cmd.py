@@ -3,8 +3,8 @@ import os
 import time
 from rich import print
 
-from utils.log import console
-from utils.solved import solvedAPI
+from .utils.log import console
+from .utils.solved import solvedAPI
 
 
 def create_level_folder(problem_id: int, rank: list[str, str], lang="python") -> None:

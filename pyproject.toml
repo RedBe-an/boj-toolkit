@@ -1,0 +1,31 @@
+[project]
+name = "boj-toolkit"
+authors = [{name="RedBe-an", email="redbean.of@gmail.com"}]
+version = "0.1.1a"
+description = "Command line interface for baekjoon online judge"
+readme = "README.md"
+dependencies = [
+    "beautifulsoup4==4.11.1",
+    "requests==2.28.2",
+    "rich==13.2.0",
+]
+requires-python = ">=3.12"
+keywords = ["boj", "baekjoon", "cli", "boj-cli"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "Operating System :: Microsoft :: Windows :: Windows 11",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3.12",
+]
+
+[build-system]
+requires = [
+    "setuptools==67.7.2",
+    "requests==2.28.2",
+    "wheel==0.40.0",
+]
+build-backend = "setuptools.build_meta"
+
+[project.scripts]
+boj = "boj.entry:cli"
