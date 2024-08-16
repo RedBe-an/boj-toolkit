@@ -2,11 +2,13 @@ import os
 import time
 import subprocess
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from rich.console import Console
 from bs4 import BeautifulSoup
 import requests
 
-from .utils.solved import solvedAPI
-from .utils.log import console
+from core.solved import solvedAPI
+
+console = Console()
 
 class ProblemFetcher:
     def __init__(self, problem_id):

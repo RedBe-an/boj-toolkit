@@ -2,10 +2,11 @@ import json
 import os
 import time
 from rich import print
+from rich.console import Console
 
-from .utils.log import console
-from .utils.solved import solvedAPI
+from core.solved import solvedAPI
 
+console = Console()
 
 def create_level_folder(problem_id: int, rank: list[str, str], lang="python") -> None:
     created = False

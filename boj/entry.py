@@ -1,8 +1,8 @@
 import argparse
 
-from .add_cmd import new_problem
-from .test_cmd import TestCaseExecutor
-from .utils.solved import solvedAPI
+from commands.add_cmd import new_problem
+from commands.test_cmd import TestCaseExecutor
+from core.solved import solvedAPI
 
 
 def cli():
@@ -40,3 +40,4 @@ def cli():
         executor.execute()
 
 
+cli()

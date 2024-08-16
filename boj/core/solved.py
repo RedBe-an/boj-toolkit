@@ -2,9 +2,9 @@ import time
 from typing import Dict, Tuple
 import requests
 import json
+from rich.console import Console
 
-from .log import console
-
+console = Console()
 
 class solvedAPI:
     rank_info: Dict[int, Tuple[str, str]] = {}
