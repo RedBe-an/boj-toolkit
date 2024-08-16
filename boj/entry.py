@@ -1,11 +1,11 @@
 import argparse
 
-from add import new_problem
-from test import TestCaseExecutor
-from utils.solved import solvedAPI
+from .add_cmd import new_problem
+from .test_cmd import TestCaseExecutor
+from .utils.solved import solvedAPI
 
 
-def main():
+def cli():
     parser = argparse.ArgumentParser(description="CLI for managing problems.")
     subparsers = parser.add_subparsers(dest="command")
 
@@ -40,7 +40,3 @@ def main():
         executor.execute()
 
 
-
-
-if __name__ == "__main__":
-    main()

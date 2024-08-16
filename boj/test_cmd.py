@@ -5,8 +5,8 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from bs4 import BeautifulSoup
 import requests
 
-from utils.solved import solvedAPI
-from utils.log import console
+from .utils.solved import solvedAPI
+from .utils.log import console
 
 class ProblemFetcher:
     def __init__(self, problem_id):
