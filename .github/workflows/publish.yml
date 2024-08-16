@@ -1,0 +1,51 @@
+name: Release drafter
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        required: true
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+
+permissions:
+  contents: read
+
+jobs:
+  draft_release:
+    permissions:
+      contents: write
+      pull-requests: write
+
+    runs-on: ubuntu-latest
+    outputs:
+      tag_name: ${{ steps.release.outputs.tag_name }}
+    steps:
+      - uses: release-drafter/release-drafter@v5
+        id: release
+        with:
+          config-name: ${{ inputs.version }}-release.yaml
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  build_and_publish:
+    needs: draft_release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.12"
+      - name: Build package
+        env:
+          BOJ_TOOLKIT_NEXT_VERSION: ${{ needs.draft_release.outputs.tag_name }}
+        run: |
+          python -m build
+      - name: Publish to pypi
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          password: ${{ secrets.PYPI_API_TOKEN }}
