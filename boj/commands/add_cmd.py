@@ -4,7 +4,7 @@ import time
 from rich import print
 from rich.console import Console
 
-from core.solved import solvedAPI
+from boj.core.solved import solvedAPI
 
 console = Console()
 
@@ -14,7 +14,7 @@ def create_level_folder(problem_id: int, rank: list[str, str], lang="python") ->
     level_part, level_num = rank
     directory_path = os.path.join(level_part, level_num, str(problem_id))
     os.makedirs(directory_path, exist_ok=True)
-    with open("settings/language.json", "r", encoding="utf-8") as f:
+    with open("boj/settings/language.json", "r", encoding="utf-8") as f:
         data = json.load(f)
         extension = data[lang]
     file_path = os.path.join(directory_path, f"main{extension}")

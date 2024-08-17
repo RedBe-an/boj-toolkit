@@ -6,7 +6,7 @@ from rich.console import Console
 from bs4 import BeautifulSoup
 import requests
 
-from core.solved import solvedAPI
+from boj.core.solved import solvedAPI
 
 console = Console()
 
@@ -96,6 +96,7 @@ class TestRunner:
                 self.results.append((index, result))
             except Exception as e:
                 console.print(f"[bold red]Error in test Case #{index}: {e}[/bold red]")
+                e.with_traceback("tb")
             time.sleep(1)
 
     def _evaluate_results(self):
@@ -158,7 +159,7 @@ class TestRunner:
 
         command = []
         if file_ext == ".py":
-            command = ["python3", f"./{self.base_path}/{solution_file}"]
+            command = ["python", f"./{self.base_path}/{solution_file}"]
         elif file_ext == ".cpp":
             executable = f"./{self.base_path}/{solution_file.replace('.cpp', '')}"
             subprocess.run(["g++", f"./{self.base_path}/{solution_file}", "-o", executable, "-std=c++17"])

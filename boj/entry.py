@@ -1,8 +1,8 @@
 import argparse
 
-from commands.add_cmd import new_problem
-from commands.test_cmd import TestCaseExecutor
-from core.solved import solvedAPI
+from boj.commands.add_cmd import new_problem
+from boj.commands.test_cmd import TestCaseExecutor
+from boj.core.solved import solvedAPI
 
 
 def cli():
@@ -39,5 +39,3 @@ def cli():
         executor = TestCaseExecutor(1000)
         executor.execute()
 
-
-cli()

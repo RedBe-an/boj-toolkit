@@ -13,7 +13,7 @@ class solvedAPI:
     def load_rank_info():
         with console.status("Load level.json...") as status:
             time.sleep(0.1)
-        with open("settings/level.json", "r", encoding="utf-8") as f:
+        with open("boj/settings/level.json", "r", encoding="utf-8") as f:
             data = json.load(f)
             solvedAPI.rank_info = {int(k): (v[0], v[1]) for k, v in data.items()}
 

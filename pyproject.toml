@@ -1,7 +1,7 @@
 [project]
 name = "boj-toolkit"
 authors = [{name="RedBe-an", email="redbean.of@gmail.com"}]
-version = "0.1.2a0"
+version = "0.1.4a0"
 description = "Command line interface for baekjoon online judge"
 readme = "README.md"
 dependencies = [
