@@ -1,6 +1,6 @@
 import os
 
-from errors.error import FileIOError
+from boj.errors.error import FileIOError
 
 def mkdir(path: str, exist_ok=True):
     try:
