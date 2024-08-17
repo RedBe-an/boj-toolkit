@@ -44,7 +44,7 @@ jobs:
         env:
           BOJ_TOOLKIT_NEXT_VERSION: ${{ needs.draft_release.outputs.tag_name }}
         run: |
-          python -m build
+          python3 -m build
       - name: Publish to pypi
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
