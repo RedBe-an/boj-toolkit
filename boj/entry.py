@@ -36,6 +36,5 @@ def cli():
         new_problem(args.problem_id, args.lang)
     if args.command == "test":
         solvedAPI.load_rank_info()
-        executor = TestCaseExecutor(1000)
+        executor = TestCaseExecutor(args.problem_id)
         executor.execute()
-

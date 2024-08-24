@@ -1,13 +1,15 @@
 [project]
 name = "boj-toolkit"
 authors = [{name="RedBe-an", email="redbean.of@gmail.com"}]
-version = "0.1.5a0"
+version = "0.1.6a0"
 description = "Command line interface for baekjoon online judge"
 readme = "README.md"
 dependencies = [
     "beautifulsoup4==4.11.1",
     "requests==2.28.2",
     "rich==13.2.0",
+    "selenium",
+    "webdriver-manager",
 ]
 requires-python = ">=3.12"
 keywords = ["boj", "baekjoon", "cli", "boj-cli"]

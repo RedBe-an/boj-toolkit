@@ -1,10 +1,9 @@
 {
-    "node.js": ".js",
-    "C++17": ".cpp",
-    "C99": ".c",
-    "Go": ".go",
-    "C#": ".cs",
-    "Python3": ".py",
-    "PyPy3": ".py",
-    "typescript": ".ts"
+    "js": ".js",
+    "cpp": ".cpp",
+    "c": ".c",
+    "go": ".go",
+    "cs": ".cs",
+    "py": ".py",
+    "ts": ".ts"
 }

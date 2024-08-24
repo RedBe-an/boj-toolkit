@@ -2,16 +2,19 @@ import os
 
 from boj.errors.error import FileIOError
 
+
 def mkdir(path: str, exist_ok=True):
     try:
         os.makedirs(name=path, exist_ok=exist_ok)
     except OSError as e:
         raise e
 
+
 def file_exists(path: str):
     if os.path.isfile(path):
         return True
     return False
+
 
 class GeneralFileIO:
     def read(self, path: str) -> bytes:

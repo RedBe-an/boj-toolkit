@@ -10,6 +10,7 @@ from boj.core.solved import solvedAPI
 
 console = Console()
 
+
 class ProblemFetcher:
     def __init__(self, problem_id):
         self.problem_id = problem_id
@@ -44,7 +45,9 @@ class ProblemFetcher:
 
         # Check if sample_data is empty or not
         if not sample_data:
-            raise Exception("Sample data not found. The HTML structure might have changed.")
+            raise Exception(
+                "Sample data not found. The HTML structure might have changed."
+            )
 
         os.makedirs(f"./{base_path}/data", exist_ok=True)
         for elem in sample_data:
@@ -96,7 +99,6 @@ class TestRunner:
                 self.results.append((index, result))
             except Exception as e:
                 console.print(f"[bold red]Error in test Case #{index}: {e}[/bold red]")
-                e.with_traceback("tb")
             time.sleep(1)
 
     def _evaluate_results(self):
@@ -107,30 +109,44 @@ class TestRunner:
             expected_output_lines = expected_output.strip().splitlines()
 
             if actual_output_lines == expected_output_lines:
-                self._print_result(index, actual_output, expected_output, input_value, "green")
+                self._print_result(
+                    index, actual_output, expected_output, input_value, "green"
+                )
                 corrects.append(True)
             else:
-                self._print_result(index, actual_output, expected_output, input_value, "red")
+                self._print_result(
+                    index, actual_output, expected_output, input_value, "red"
+                )
                 corrects.append(False)
 
         self._print_summary(corrects)
 
     def _print_result(self, index, actual_output, expected_output, input_value, color):
-        console.print(f"[bold {color}]---------------------------------------------------[/bold {color}]")
-        console.print(f"[bold deep_sky_blue1]Test Case #{index} :[/bold deep_sky_blue1] [bold {color}]OUTPUT[/bold {color}]")
+        console.print(
+            f"[bold {color}]---------------------------------------------------[/bold {color}]"
+        )
+        console.print(
+            f"[bold deep_sky_blue1]Test Case #{index} :[/bold deep_sky_blue1] [bold {color}]OUTPUT[/bold {color}]"
+        )
         console.print(f"[bold magenta]Input:[/bold magenta] \n{input_value.strip()}\n")
-        console.print(f"[bold magenta]Expected:[/bold magenta] \n{expected_output.strip()}")
+        console.print(
+            f"[bold magenta]Expected:[/bold magenta] \n{expected_output.strip()}"
+        )
         console.print(f"[bold magenta]Yours:[/bold magenta] \n{actual_output.strip()}")
 
     def _print_summary(self, corrects):
         final_color = "green" if all(corrects) else "red"
-        console.print(f"[bold {final_color}]---------------------------------------------------[/]")
+        console.print(
+            f"[bold {final_color}]---------------------------------------------------[/]"
+        )
         console.print("\n[bold green]All tests completed![/bold green]")
 
         for count, correct in enumerate(corrects, start=1):
             status = "PASS" if correct else "FAILED"
             color = "green" if correct else "red"
-            console.print(f"[bold deep_sky_blue1]- Test Case #{count} :[/] [bold {color}]{status}[/]")
+            console.print(
+                f"[bold deep_sky_blue1]- Test Case #{count} :[/] [bold {color}]{status}[/]"
+            )
 
     def _execute_test_case(self, index):
         input_file = f"./{self.base_path}/data/{index}.in"
@@ -144,11 +160,18 @@ class TestRunner:
 
     def _execute_solution(self, input_file):
         # Determine the file type and set the command accordingly
-        solution_files = [f for f in os.listdir(f"./{self.base_path}") if os.path.isfile(os.path.join(f"./{self.base_path}", f))]
+        solution_files = [
+            f
+            for f in os.listdir(f"./{self.base_path}")
+            if os.path.isfile(os.path.join(f"./{self.base_path}", f))
+        ]
         solution_file = None
 
         for file in solution_files:
-            if any(file.endswith(ext) for ext in [".py", ".cpp", ".c", ".go", ".cs", ".js", ".ts"]):
+            if any(
+                file.endswith(ext)
+                for ext in [".py", ".cpp", ".c", ".go", ".cs", ".js", ".ts"]
+            ):
                 solution_file = file
                 break
 
@@ -162,17 +185,35 @@ class TestRunner:
             command = ["python", f"./{self.base_path}/{solution_file}"]
         elif file_ext == ".cpp":
             executable = f"./{self.base_path}/{solution_file.replace('.cpp', '')}"
-            subprocess.run(["g++", f"./{self.base_path}/{solution_file}", "-o", executable, "-std=c++17"])
+            subprocess.run(
+                [
+                    "g++",
+                    f"./{self.base_path}/{solution_file}",
+                    "-o",
+                    executable,
+                    "-std=c++17",
+                ]
+            )
             command = [executable]
         elif file_ext == ".c":
             executable = f"./{self.base_path}/{solution_file.replace('.c', '')}"
-            subprocess.run(["gcc", f"./{self.base_path}/{solution_file}", "-o", executable, "-std=c99"])
+            subprocess.run(
+                [
+                    "gcc",
+                    f"./{self.base_path}/{solution_file}",
+                    "-o",
+                    executable,
+                    "-std=c99",
+                ]
+            )
             command = [executable]
         elif file_ext == ".go":
             command = ["go", "run", f"./{self.base_path}/{solution_file}"]
         elif file_ext == ".cs":
             executable = f"./{self.base_path}/{solution_file.replace('.cs', '.exe')}"
-            subprocess.run(["csc", "-out:" + executable, f"./{self.base_path}/{solution_file}"])
+            subprocess.run(
+                ["csc", "-out:" + executable, f"./{self.base_path}/{solution_file}"]
+            )
             command = [executable]
         elif file_ext == ".js":
             command = ["node", f"./{self.base_path}/{solution_file}"]

@@ -6,6 +6,7 @@ from rich.console import Console
 
 console = Console()
 
+
 class solvedAPI:
     rank_info: Dict[int, Tuple[str, str]] = {}
 

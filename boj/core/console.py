@@ -5,7 +5,7 @@ import random
 from rich.console import Console, RenderableType
 from rich.status import Status
 from rich.style import StyleType
-from rich import print
+
 
 class BojConsole(Console):
     error_color = "red"
@@ -23,7 +23,7 @@ class BojConsole(Console):
 
     def warn(self, message):
         super().print(f"[bold {self.warn_color}]Warning: {message}[/]")
-    
+
     def status(
         self,
         status: RenderableType,
@@ -77,4 +77,3 @@ class BojStatus(Status):
         time.sleep(0.08 + random.uniform(0.1, 0.2))
         super().update(status=f"{self.status_color}{status}[/]")
         time.sleep(0.08 + random.uniform(0.1, 0.2))
-
