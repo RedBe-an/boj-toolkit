@@ -122,9 +122,7 @@ class TestRunner:
         self._print_summary(corrects)
 
     def _print_result(self, index, actual_output, expected_output, input_value, color):
-        console.print(
-            f"[bold {color}]---------------------------------------------------[/bold {color}]"
-        )
+        console.rule(f"[bold {color}][/]")
         console.print(
             f"[bold deep_sky_blue1]Test Case #{index} :[/bold deep_sky_blue1] [bold {color}]OUTPUT[/bold {color}]"
         )

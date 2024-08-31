@@ -22,13 +22,7 @@ def cli():
 
     test_parser = subparsers.add_parser("test", help="test a problem")
     test_parser.add_argument("problem_id", type=int, help="The ID of the problem")
-    test_parser.add_argument(
-        "-l",
-        "--lang",
-        type=str,
-        help="Programming language (e.g., C++17)",
-        default="PyPy3",
-    )
+
 
     args = parser.parse_args()
 

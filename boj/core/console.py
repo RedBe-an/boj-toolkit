@@ -1,52 +1,44 @@
+import time
 from typing import Optional
 
-import time
-import random
 from rich.console import Console, RenderableType
 from rich.status import Status
 from rich.style import StyleType
 
-
 class BojConsole(Console):
-    error_color = "red"
-    info_color = "blue"
-    warn_color = "yellow"
+    COLORS = {
+        'error': 'red',
+        'info': 'deep_sky_blue1',
+        'warn': 'yellow',
+    }
 
     def __init__(self):
         super().__init__(log_time=False, log_path=False)
 
-    def error(self, message):
-        super().print(f"[bold {self.error_color}]Error: {message}[/]")
-
-    def info(self, message):
-        super().print(f"[bold {self.info_color}]Info: {message}[/]")
-
-    def warn(self, message):
-        super().print(f"[bold {self.warn_color}]Warning: {message}[/]")
+    def log(self, message_type: str, message: str):
+        color = self.COLORS.get(message_type, 'white')
+        super().print(f"[bold {color}]{message_type.capitalize()}: {message}[/]")
 
     def status(
         self,
         status: RenderableType,
         *,
         spinner: str = "dots",
-        spinner_style: str = "status.spinner",
+        spinner_style: str = "white",
         speed: float = 1.0,
         refresh_per_second: float = 12.5,
     ) -> Status:
         status_renderable = BojStatus(
-            f"{status}",
+            f"[bold yellow]{status}",
             console=self,
             spinner=spinner,
-            spinner_style="white",
+            spinner_style=spinner_style,
             speed=speed,
             refresh_per_second=refresh_per_second,
         )
         return status_renderable
 
-
 class BojStatus(Status):
-    status_color: str = "[bold blue]"
-
     def __init__(
         self,
         status: RenderableType,
@@ -56,6 +48,8 @@ class BojStatus(Status):
         spinner_style: StyleType = "status.spinner",
         speed: float = 1.0,
         refresh_per_second: float = 12.5,
+        status_term: float = 0.1,
+        status_color: str = "[bold yellow]",
     ):
         super().__init__(
             status=status,
@@ -65,15 +59,25 @@ class BojStatus(Status):
             speed=speed,
             refresh_per_second=refresh_per_second,
         )
+        self._status_color = status_color
+        self._status_term = status_term
 
     def update(
         self,
         status: Optional[RenderableType] = None,
-        *,
-        spinner: Optional[str] = None,
-        spinner_style: Optional[StyleType] = None,
-        speed: Optional[float] = None,
     ) -> None:
-        time.sleep(0.08 + random.uniform(0.1, 0.2))
-        super().update(status=f"{self.status_color}{status}[/]")
-        time.sleep(0.08 + random.uniform(0.1, 0.2))
+        time.sleep(self._status_term)
+        super().update(status=f"{self._status_color}{status}")
+        time.sleep(self._status_term)
+
+if __name__ == "__main__":
+    console = BojConsole()
+    console.log('info', 'hello, world!')
+    console.log('warn', 'hello, world!')
+    console.log('error', 'hello, world!')
+
+    with console.status("Loading inputs...") as status:
+        console.log('info', 'Loading input 1...')
+        time.sleep(1)
+        console.log('info', 'Loading input 2...')
+        time.sleep(1)
